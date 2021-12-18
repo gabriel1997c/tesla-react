@@ -1,61 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import Section from "./Section";
+import { useSelector } from "react-redux";
+import productSlice, { selectProducts } from "../features/product/productSlice";
 
 function Home() {
+  const products = useSelector(selectProducts);
   return (
-    <BigContainer>
-      <Container>
-        <Section
-          title="Model S"
-          description="Order Online for Touchless Delivery"
-          backgroundImg="model-s.jpg"
-          leftBtnText="Custom Order"
-          rightBtnText="Existing Inventory"
-        />
-        <Section
-          title="Model Y"
-          description="Order Online for Touchless Delivery"
-          backgroundImg="model-y.jpg"
-          leftBtnText="Custom Order"
-          rightBtnText="Existing Inventory"
-        />
-        <Section
-          title="Model 3"
-          description="Order Online for Touchless Delivery"
-          backgroundImg="model-3.jpg"
-          leftBtnText="Custom Order"
-          rightBtnText="Existing Inventory"
-        />
-        <Section
-          title="Model X"
-          description="Order Online for Touchless Delivery"
-          backgroundImg="model-x.jpg"
-          leftBtnText="Custom Order"
-          rightBtnText="Existing Inventory"
-        />
-        <Section
-          title="Solar Panels"
-          description="Lowest Cost Solar Panels in America"
-          backgroundImg="solar-panel.jpg"
-          leftBtnText="Order now"
-          rightBtnText="Learn more"
-        />
-        <Section
-          title="Solar Roof"
-          description="Produce Clean Energy From Your Roof"
-          backgroundImg="solar-roof.jpg"
-          leftBtnText="Order now"
-          rightBtnText="Learn more"
-        />
-        <Section
-          title="Accessories"
-          description=""
-          backgroundImg="accessories.jpg"
-          leftBtnText="Shop now"
-        />
-      </Container>
-    </BigContainer>
+    <Container>
+      {products &&
+        products.map((product, index) => (
+          <Section
+            title={product.title}
+            description={product.description}
+            backgroundImg={product.image}
+            leftBtnText={product.type === "car" ? "Custom Order" : "Order now"}
+            rightBtnText={
+              product.type === "car"
+                ? "Existing Inventory"
+                : product.type === "solar"
+                ? "Learn more"
+                : null
+            }
+          />
+        ))}
+    </Container>
   );
 }
 
@@ -63,9 +32,8 @@ export default Home;
 
 const Container = styled.div`
   height: 100vh;
-  scroll-snap-align: center;
-`;
-
-const BigContainer = styled.div`
-  scroll-snap-type: both mandatory;
+  position: relative;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
 `;

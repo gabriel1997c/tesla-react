@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Fade from "react-reveal/Fade";
 
-function Section({ title, description, leftBtnText, rightBtnText, backgroundImg }) {
+function Section({
+  title,
+  description,
+  leftBtnText,
+  rightBtnText,
+  backgroundImg,
+}) {
   return (
     <Wrap bgImage={backgroundImg}>
       <Fade bottom>
@@ -13,13 +19,10 @@ function Section({ title, description, leftBtnText, rightBtnText, backgroundImg 
       </Fade>
       <Buttons>
         <Fade bottom>
-        <ButtonGroup>
-          <LeftButton>{leftBtnText}</LeftButton>
-          {rightBtnText &&
-            <RightButton>
-              {rightBtnText}
-            </RightButton>}
-        </ButtonGroup>
+          <ButtonGroup>
+            <LeftButton>{leftBtnText}</LeftButton>
+            {rightBtnText && <RightButton>{rightBtnText}</RightButton>}
+          </ButtonGroup>
         </Fade>
         <DownArrow src="images/down-arrow.svg" />
       </Buttons>
@@ -32,7 +35,7 @@ export default Section;
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: ${props => `url("/images/${props.bgImage}")`};
+  background-image: ${(props) => `url("/images/${props.bgImage}")`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -40,6 +43,7 @@ const Wrap = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  scroll-snap-align: center;
 `;
 
 const ItemText = styled.div`
