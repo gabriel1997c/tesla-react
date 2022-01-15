@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Section from "./Section";
 import { useSelector } from "react-redux";
-import productSlice, { selectProducts } from "../features/product/productSlice";
+import { selectProducts } from "../features/product/productSlice";
 
 function Home() {
   const products = useSelector(selectProducts);
@@ -19,8 +19,8 @@ function Home() {
               product.type === "car"
                 ? "Existing Inventory"
                 : product.type === "solar"
-                ? "Learn more"
-                : null
+                  ? "Learn more"
+                  : null
             }
           />
         ))}
